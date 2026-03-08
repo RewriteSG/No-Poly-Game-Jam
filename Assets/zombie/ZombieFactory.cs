@@ -15,6 +15,9 @@ public static class ZombieFactory
         zombieData.Type = type;
         zombieData.Traits.Clear();
 
+        //init
+        zombieData.Init();
+
         z.ZombieDataSO = zombieData;
  
         return z;

@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 
 [Serializable]
 public class Zombie 
@@ -8,12 +10,11 @@ public class Zombie
     public ZombieData ZombieDataSO;
 
     //movement var
-    private float _speed;
-    public float DEBUG_SPEED => _speed;
+    public float _speed { get; private set; }
 
     //combat var
-    private float _health;
-    private float _dmg;
+    public float _health { get; private set; }
+    public float _dmg { get; private set; }
 
     public void Awake() { }
     public void Start()
@@ -38,16 +39,16 @@ public class Zombie
             {
                 switch (trait.EffectedData)
                 {
-                    case ZombieDataTypes.Speed:
+                    case ZombieDataTypes.SPEED:
                         _speed = trait.Multiply ? _speed * trait.ChangeAmt : _speed + trait.ChangeAmt;
                         break;
 
-                    case ZombieDataTypes.Health:
+                    case ZombieDataTypes.HEALTH:
 
                         _health = trait.Multiply ? _health *  trait.ChangeAmt: _health + trait.ChangeAmt;
                         break;
 
-                    case ZombieDataTypes.Damage:
+                    case ZombieDataTypes.DAMAGE:
 
                         _dmg = trait.Multiply ? _dmg * trait.ChangeAmt : _dmg + trait.ChangeAmt;
                         break;
@@ -56,16 +57,12 @@ public class Zombie
 
         }
     }
-
-    public void Update(float dt)
-    {
-
-    }
 }
 
 public enum ZombieDataTypes
 {
-    Speed,
-    Health,
-    Damage,
+    SPEED,
+    HEALTH,
+    DAMAGE,
 }
+

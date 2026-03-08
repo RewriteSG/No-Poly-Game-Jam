@@ -11,12 +11,12 @@ public class ZombieData : ScriptableObject
 
     //Movement Var
 
-    private float _baseSpeed = 10;
+    [SerializeField] private float _baseSpeed = 10;
 
     //Combat Var
 
-    private float _baseDmg = 1;
-    private float _baseHealth = 10;
+    [SerializeField] private float _baseDmg = 1;
+    [SerializeField] private float _baseHealth = 10;
 
     #region public getters
 
@@ -25,6 +25,13 @@ public class ZombieData : ScriptableObject
     public float BaseHealth => _baseHealth;
 
     #endregion
+
+    public void Init()
+    {
+        _baseSpeed = 10;
+        _baseDmg = 1;
+        _baseHealth = 10;
+    }
 
 }
 
