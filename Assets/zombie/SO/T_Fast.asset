@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8bb3d34adb3197429e5da6d5beb59ed, type: 3}
-  m_Name: ZombieData
+  m_Script: {fileID: 11500000, guid: 1bdba63e7e224b84aa7a92d1308974f5, type: 3}
+  m_Name: T_Fast
   m_EditorClassIdentifier: 
-  type: 0
-  traits: []
+  Name: Fast
+  Description: 10% Faster
+  EffectedData: 1
+  ChangeAmt: 10
+  Percent: 1

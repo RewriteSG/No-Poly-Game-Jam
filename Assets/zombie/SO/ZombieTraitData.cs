@@ -4,10 +4,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ZombieTraitData", menuName = "Scriptable Objects/ZombieTraitData")]
 public class ZombieTraitData : ScriptableObject
 {
-    public string name;
-    public string description;
+    public string Name;
+    public string Description;
 
-    public ZombieDataTypes effectedData;
-    public float changeAmt;
-
+    [Header("Data Changes")]
+    public ZombieDataTypes EffectedData;
+    public float ChangeAmt;
+    public bool Multiply; 
 }
