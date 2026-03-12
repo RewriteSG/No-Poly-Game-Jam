@@ -16,22 +16,12 @@ public class ZombieTrainer : MonoBehaviour
             ZombieTraitDictionary.Add(trait.Name, trait);
         }
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void AddTrait(Zombie zombie, ZombieTraitData trait)
     {
         if(zombie == null) return;
 
         zombie.ZombieDataSO.Traits.Add(trait);
+        zombie.UpdateTraitData();
     }
 }

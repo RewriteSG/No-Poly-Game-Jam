@@ -1049,7 +1049,7 @@
                 {
                     "name": "",
                     "id": "574d69fb-68d8-4e4a-baca-7f5d1629ffdb",
-                    "path": "<Pointer>/delta",
+                    "path": "<Pointer>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse;Touch",

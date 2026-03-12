@@ -7,8 +7,17 @@ public class ZombieTraitData : ScriptableObject
     public string Name;
     public string Description;
 
+    public TraitRarity Rarity;
+
     [Header("Data Changes")]
     public ZombieDataTypes EffectedData;
     public float ChangeAmt;
     public bool Multiply; 
+}
+public enum TraitRarity
+{
+    COMMON = 0,
+    RARE,
+    EPIC,
+    LEGENDARY
 }

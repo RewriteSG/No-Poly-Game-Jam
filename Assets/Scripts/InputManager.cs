@@ -22,7 +22,7 @@ public class InputManager : MonoBehaviour
     private InputAction _moveAction;
     private InputAction _lookAction;
 
-    public void Awake()
+    public void Awake() 
     {
         _playerInput = GetComponent<PlayerInput>();
         _playerInput.enabled = true;

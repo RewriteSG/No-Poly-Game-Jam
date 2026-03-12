@@ -8,10 +8,11 @@ public class ZombieUpdater : MonoBehaviour
 {
     [SerializeField] private Zombie _zombie;
     [SerializeField] private Rigidbody2D _rb;
-    [SerializeField] private TMP_Text _text;
-    public Zombie Zombie => _zombie;
 
-    public Vector3 TargetPosition { get; private set; }
+    private Draggable _draggable;
+
+    //seperate later
+    [SerializeField] private TMP_Text _text;
 
     public void SetZombie(Zombie zombie)
     {
@@ -21,10 +22,14 @@ public class ZombieUpdater : MonoBehaviour
     public void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+
+        _draggable = new Draggable();
     }
 
     public void Start()
     {
+        _draggable.Init(1f);
+
         this.name = _zombie.ZombieDataSO.Type.ToString() + " zombie ";
 
         if (_zombie.ZombieDataSO.Traits.Count > 0)
@@ -41,12 +46,25 @@ public class ZombieUpdater : MonoBehaviour
 
     private void Update()
     {
+        _draggable.Dragging(transform);
+
         if (_zombie == null)
             return;
 
-        Vector3 dist = TargetPosition - transform.position;
+        if (!_zombie.isAlive || !_zombie.isActive)
+            return;
 
-        TargetPosition = new Vector3(10f, 10f, 0f);
+        if (_draggable.isDragged)
+        {
+            _zombie.SetTargetPosition(transform.position);
+        }
+
+        if(InputManager.Instance.IsMoveDown)
+        {
+            _zombie.SetTargetPosition(InputManager.Instance.PointerPos);
+        }
+
+        Vector3 dist = _zombie.TargetPosition - transform.position;
 
         if (Mathf.Abs(dist.magnitude) > 0.1f)
         {
@@ -54,7 +72,7 @@ public class ZombieUpdater : MonoBehaviour
 
             transform.position = Vector3.SmoothDamp(
                 transform.position,
-                TargetPosition,
+                _zombie.TargetPosition,
                 ref velocity,
                 _zombie._speed / 0.5f
             );
@@ -68,10 +86,17 @@ public class ZombieUpdater : MonoBehaviour
 
         }
 
-        if (_text != null)
+        //put below in seperate Zombie UI script
+        if (InputManager.Instance.IsSelectDown)
         {
-            _text.text = "Dist : " + dist.ToString() + "\n"
-                + "Speed : " + _zombie._speed.ToString() + "\n";
+            _text.text = "";
+            if (_text != null)
+            {
+                foreach (ZombieTraitData trait in _zombie.ZombieDataSO.Traits)
+                {
+                    _text.text += trait.Name;
+                }
+            }
         }
     }
 }
