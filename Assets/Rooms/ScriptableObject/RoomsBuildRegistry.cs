@@ -3,6 +3,7 @@ using UnityEngine;
 public class RoomsBuildRegistry : ScriptableObject
 {
     public RoomBuildData[] Rooms = new RoomBuildData[0];
+    [Range(1, 20)] public int Width = 1, Height = 1;
     float _totalWeight;
     public struct BuildData
     {

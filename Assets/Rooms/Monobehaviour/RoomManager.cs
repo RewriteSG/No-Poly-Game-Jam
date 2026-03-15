@@ -2,38 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[DefaultExecutionOrder(-1)]
 public class RoomManager : MonoBehaviour
 {
-    public struct RoomOccupant
+    public static RoomManager instance;
+    void OnEnable()
     {
-        Type type;
-        object instance;
-    }
-    public struct Room
-    {
-        public int Pos_X;
-        public int Pos_Y;
-        public bool IsNull;
-        public RoomData RoomData;
-        public int CurrentCapacity;
-        public List<RoomOccupant> Occupants;
+        instance = this;
     }
     public Room[][] Rooms = new Room[0][];
-    private int _width;
-    private int _height;
-    public void InitRooms(int width, int height)
-    {
-        _height = height;
-        _width = width;
-        Rooms = new Room[_height][];
-        for (int i = 0; i < _height; i++)
-        {
-            Rooms[i] = new Room[_width];
-        }
-    }
     public List<Coroutine> coroutines = new List<Coroutine>();
-    IEnumerator MoveOccupant(RoomOccupant occupant, int newX, int newY, float duration)
+    public IEnumerator MoveOccupant(RoomOccupant occupant, int newX, int newY, float duration)
     {
         yield return new WaitForSeconds(duration);
         AddOccupant(occupant, newX, newY);
