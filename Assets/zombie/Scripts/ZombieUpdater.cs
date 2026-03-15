@@ -6,7 +6,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class ZombieUpdater : MonoBehaviour
 {
-    [SerializeField] private Zombie _zombie;
+    [SerializeField] public Zombie _zombie {get; private set;}
     [SerializeField] private Rigidbody2D _rb;
 
     private Draggable _draggable;
@@ -81,9 +81,6 @@ public class ZombieUpdater : MonoBehaviour
             {
                 velocity = Vector3.zero;
             }
-
-            _rb.AddForce(velocity, ForceMode2D.Force);
-
         }
 
         //put below in seperate Zombie UI script

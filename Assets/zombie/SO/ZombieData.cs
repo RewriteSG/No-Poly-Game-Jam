@@ -39,6 +39,7 @@ public enum ZombieType
 {
     NORMAL,
     TANK,
+    TOTAL
 }
 
 
